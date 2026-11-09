@@ -6,13 +6,20 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\StandController as AdminStandController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StandController;
+use App\Http\Controllers\Penjaga\DashboardController as PenjagaDashboardController;
+use App\Http\Controllers\Penjaga\ProductController as PenjagaProductController;
+use App\Http\Controllers\Penjaga\OrderController as PenjagaOrderController;
+use App\Http\Controllers\Penjaga\ReportController as PenjagaReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,6 +72,17 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 // --------------------------------------------------------------------------
+// Profil & Ubah Password (Semua Role Authenticated)
+// --------------------------------------------------------------------------
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/password/change', [PasswordController::class, 'showChangeForm'])->name('password.change');
+    Route::post('/password/change', [PasswordController::class, 'change'])->name('password.update');
+});
+
+// --------------------------------------------------------------------------
 // Admin Dashboard & Manajemen (Dilindungi Middleware Auth & Admin)
 // --------------------------------------------------------------------------
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -98,5 +116,42 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/', [AdminReportController::class, 'index'])->name('index');
         Route::get('/export-csv', [AdminReportController::class, 'exportCsv'])->name('export_csv');
         Route::get('/print', [AdminReportController::class, 'print'])->name('print');
+    });
+
+    // Manajemen Pengguna
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [AdminUserController::class, 'index'])->name('index');
+        Route::get('/create', [AdminUserController::class, 'create'])->name('create');
+        Route::post('/', [AdminUserController::class, 'store'])->name('store');
+        Route::get('/{user}/edit', [AdminUserController::class, 'edit'])->name('edit');
+        Route::put('/{user}', [AdminUserController::class, 'update'])->name('update');
+        Route::post('/{user}/reset-password', [AdminUserController::class, 'resetPassword'])->name('reset-password');
+    });
+});
+
+// --------------------------------------------------------------------------
+// Penjaga Dashboard & Manajemen (Dilindungi Middleware Auth & Penjaga)
+// --------------------------------------------------------------------------
+Route::middleware(['auth', 'penjaga'])->prefix('penjaga')->name('penjaga.')->group(function () {
+    // Redirect /penjaga to /penjaga/dashboard
+    Route::get('/', fn() => redirect()->route('penjaga.dashboard'));
+
+    // Dashboard Penjaga
+    Route::get('/dashboard', [PenjagaDashboardController::class, 'index'])->name('dashboard');
+
+    // Produk Stand Sendiri
+    Route::post('/products/{product}/stock', [PenjagaProductController::class, 'updateStock'])->name('products.stock');
+    Route::resource('products', PenjagaProductController::class);
+
+    // Pesanan Stand Sendiri
+    Route::prefix('orders')->name('orders.')->group(function () {
+        Route::get('/', [PenjagaOrderController::class, 'index'])->name('index');
+        Route::get('/{order}', [PenjagaOrderController::class, 'show'])->name('show');
+        Route::post('/{order}/status', [PenjagaOrderController::class, 'updateStatus'])->name('status');
+    });
+
+    // Laporan Stand Sendiri
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('/', [PenjagaReportController::class, 'index'])->name('index');
     });
 });

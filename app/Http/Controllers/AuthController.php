@@ -48,6 +48,11 @@ class AuthController extends Controller
                     ->with('success', 'Selamat datang kembali, Administrator!');
             }
 
+            if (Auth::user()->isPenjaga()) {
+                return redirect()->intended(route('penjaga.dashboard'))
+                    ->with('success', 'Selamat datang, ' . Auth::user()->name . '!');
+            }
+
             return redirect()->intended(route('home'))
                 ->with('success', 'Selamat datang di Kantin Sekolah MELATIAREA, ' . Auth::user()->name . '!');
         }
@@ -94,7 +99,7 @@ class AuthController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => 'siswa', // Default register is always siswa
+            'role' => 'siswa',
             'nis' => $validated['nis'] ?? null,
             'class_room' => $validated['class_room'] ?? null,
             'phone' => $validated['phone'] ?? null,
@@ -119,4 +124,3 @@ class AuthController extends Controller
             ->with('info', 'Anda telah berhasil keluar (logout).');
     }
 }
-

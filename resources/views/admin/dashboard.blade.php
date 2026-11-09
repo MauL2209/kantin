@@ -6,10 +6,21 @@
 @section('content')
 
     <div class="space-y-8">
-        
-        <!-- 6 Key Metrics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-            
+
+        <!-- Header with User Management Link -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Ringkasan Hari Ini</h2>
+            </div>
+            <a href="{{ route('admin.users.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition shadow-sm">
+                <i class="fas fa-users text-xs"></i>
+                <span>Kelola Pengguna</span>
+            </a>
+        </div>
+
+        <!-- 8 Key Metrics Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-4">
+
             <!-- Penjualan Hari Ini -->
             <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
                 <div class="flex items-center justify-between text-emerald-600 mb-2">
@@ -94,11 +105,39 @@
                 </div>
             </div>
 
+            <!-- Total Siswa -->
+            <a href="{{ route('admin.users.index', ['role' => 'siswa']) }}" class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between hover:border-indigo-300 hover:shadow-md transition group">
+                <div class="flex items-center justify-between text-indigo-600 mb-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider group-hover:text-indigo-600 transition">Total Siswa</span>
+                    <div class="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center text-sm">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black text-slate-900">{{ $totalSiswa }}</h3>
+                    <p class="text-[11px] text-indigo-600 font-semibold mt-0.5">Akun Siswa</p>
+                </div>
+            </a>
+
+            <!-- Total Penjaga -->
+            <a href="{{ route('admin.users.index', ['role' => 'penjaga']) }}" class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between hover:border-emerald-300 hover:shadow-md transition group">
+                <div class="flex items-center justify-between text-emerald-600 mb-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider group-hover:text-emerald-600 transition">Total Penjaga</span>
+                    <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-sm">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black text-slate-900">{{ $totalPenjaga }}</h3>
+                    <p class="text-[11px] text-emerald-600 font-semibold mt-0.5">Penjaga Kantin</p>
+                </div>
+            </a>
+
         </div>
 
         <!-- 2 Analytic Charts (Sales Trend & Best Selling Products) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
+
             <!-- Chart 1: Daily Sales Trend (7 Days) -->
             <div class="lg:col-span-8 bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm">
                 <div class="flex items-center justify-between mb-4">
@@ -133,7 +172,7 @@
 
         <!-- Recent Orders Table -->
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden p-6 space-y-4">
-            
+
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                 <div>
                     <h3 class="text-base font-bold text-slate-900">Pesanan Terbaru Masuk</h3>

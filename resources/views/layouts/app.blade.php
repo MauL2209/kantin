@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="hidden sm:block text-left text-xs">
                                     <p class="font-bold text-slate-800 leading-tight max-w-[100px] truncate">{{ Auth::user()->name }}</p>
-                                    <span class="text-[10px] text-brand-600 font-semibold">{{ Auth::user()->isAdmin() ? 'Administrator' : (Auth::user()->class_room ?? 'Siswa') }}</span>
+                                    <span class="text-[10px] text-brand-600 font-semibold">{{ Auth::user()->isAdmin() ? 'Administrator' : (Auth::user()->isPenjaga() ? 'Penjaga Kantin' : (Auth::user()->class_room ?? 'Siswa')) }}</span>
                                 </div>
                                 <i class="fas fa-chevron-down text-[10px] text-slate-400"></i>
                             </button>
@@ -171,19 +171,51 @@
                                     <a href="{{ route('admin.reports.index') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
                                         <i class="fas fa-chart-line text-brand-600 w-4"></i> Laporan Penjualan
                                     </a>
+                                    <a href="{{ route('admin.users.index') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
+                                        <i class="fas fa-users text-violet-500 w-4"></i> Manajemen Pengguna
+                                    </a>
                                     <div class="border-t border-slate-100 my-1"></div>
+                                    <form method="POST" action="{{ route('logout') }}" class="mt-1">
+                                        @csrf
+                                        <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 font-medium transition">
+                                            <i class="fas fa-arrow-right-from-bracket w-4"></i> Keluar (Logout)
+                                        </button>
+                                    </form>
+                                @elseif(Auth::user()->isPenjaga())
+                                    <a href="{{ route('penjaga.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
+                                        <i class="fas fa-gauge-high text-emerald-600 w-4"></i> Dashboard Penjaga
+                                    </a>
+                                    <a href="{{ route('profile.show') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
+                                        <i class="fas fa-user-circle text-slate-400 w-4"></i> Profil Saya
+                                    </a>
+                                    <a href="{{ route('password.change') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
+                                        <i class="fas fa-key text-slate-400 w-4"></i> Ubah Password
+                                    </a>
+                                    <div class="border-t border-slate-100 my-1"></div>
+                                    <form method="POST" action="{{ route('logout') }}" class="mt-1">
+                                        @csrf
+                                        <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 font-medium transition">
+                                            <i class="fas fa-arrow-right-from-bracket w-4"></i> Keluar (Logout)
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="{{ route('orders.index') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
+                                        <i class="fas fa-receipt text-slate-400 w-4"></i> Pesanan Saya
+                                    </a>
+                                    <a href="{{ route('profile.show') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
+                                        <i class="fas fa-user-circle text-slate-400 w-4"></i> Profil Saya
+                                    </a>
+                                    <a href="{{ route('password.change') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
+                                        <i class="fas fa-key text-slate-400 w-4"></i> Ubah Password
+                                    </a>
+                                    <div class="border-t border-slate-100 my-1"></div>
+                                    <form method="POST" action="{{ route('logout') }}" class="mt-1">
+                                        @csrf
+                                        <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 font-medium transition">
+                                            <i class="fas fa-arrow-right-from-bracket w-4"></i> Keluar (Logout)
+                                        </button>
+                                    </form>
                                 @endif
-
-                                <a href="{{ route('orders.index') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-brand-700 font-medium">
-                                    <i class="fas fa-receipt text-slate-400 w-4"></i> Pesanan Saya
-                                </a>
-
-                                <form method="POST" action="{{ route('logout') }}" class="mt-1 border-t border-slate-100 pt-1">
-                                    @csrf
-                                    <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 font-medium transition">
-                                        <i class="fas fa-arrow-right-from-bracket w-4"></i> Keluar (Logout)
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     @else

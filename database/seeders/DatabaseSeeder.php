@@ -76,76 +76,76 @@ class DatabaseSeeder extends Seeder
         // 3. 8 Stand Kantin (Masing-masing dari 8 Jurusan)
         $standsData = [
             [
-                'name' => 'Stand Bisnis Digital',
+                'name' => 'Saung Monas',
                 'department' => 'Bisnis Digital',
                 'description' => 'Menyediakan hidangan kekinian, aneka racikan kopi modern, dan cemilan viral karya wirausaha siswa jurusan Bisnis Digital.',
-                'image' => 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/standbd.jpeg',
                 'status' => 'open',
-                'location' => 'Zona A - Stand No. 01',
-                'contact_person' => 'Bu Ratna (0812-1001-001)',
+                'location' => 'Balemindo Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
             [
-                'name' => 'Stand Manajemen Logistik',
+                'name' => 'Sunda Kelapa',
                 'department' => 'Manajemen Logistik',
                 'description' => 'Sajian cepat saji berkualitas, higienis, dan terdistribusi cepat dari siswa jurusan Manajemen Logistik.',
-                'image' => 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/manlok.jpg.jpeg',
                 'status' => 'open',
-                'location' => 'Zona A - Stand No. 02',
-                'contact_person' => 'Pak Hendra (0812-1001-002)',
+                'location' => 'Balemindo Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
             [
-                'name' => 'Stand Layanan Perbankan Syariah',
+                'name' => 'Jakarta Jelas',
                 'department' => 'Layanan Perbankan Syariah',
                 'description' => 'Makanan dan minuman halal, thayyib, berkah, dengan cita rasa autentik dan kebersihan terjamin.',
-                'image' => 'https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/standlps.jpg.jpeg',
                 'status' => 'open',
-                'location' => 'Zona B - Stand No. 03',
-                'contact_person' => 'Ibu Farida (0812-1001-003)',
+                'location' => 'Balemindo Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
             [
-                'name' => 'Stand Akuntansi 1',
+                'name' => 'Seruput Batavia',
                 'department' => 'Akuntansi 1',
                 'description' => 'Paket makan hemat, lezat, terhitung presisi dengan porsi pas dan bersahabat bagi kantong seluruh siswa.',
-                'image' => 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/standak1.jpg.jpeg',
                 'status' => 'open',
-                'location' => 'Zona B - Stand No. 04',
-                'contact_person' => 'Bu Dewi (0812-1001-004)',
+                'location' => 'Balemindo Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
             [
-                'name' => 'Stand Bisnis Retail',
+                'name' => 'Saung Bahari',
                 'department' => 'Bisnis Retail',
                 'description' => 'Pusat jajanan serba ada, snack kemasan premium, minuman segar dingin, dan frozen food siap santap.',
-                'image' => 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/br.jpg.jpeg',
                 'status' => 'open',
-                'location' => 'Zona C - Stand No. 05',
-                'contact_person' => 'Pak Bambang (0812-1001-005)',
+                'location' => 'Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
             [
-                'name' => 'Stand Manajemen Perkantoran',
+                'name' => 'Lenggang Jakarta',
                 'department' => 'Manajemen Perkantoran',
                 'description' => 'Menu elegan, bento box rapi, sandwich sehat, dan mocktail segar dengan pelayanan ramah berstandar perkantoran.',
-                'image' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/standmp.jpg.jpeg',
                 'status' => 'open',
-                'location' => 'Zona C - Stand No. 06',
-                'contact_person' => 'Bu Sri (0812-1001-006)',
+                'location' => 'Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
             [
-                'name' => 'Stand Rekayasa Perangkat Lunak',
+                'name' => 'Gambir Raya',
                 'department' => 'Rekayasa Perangkat Lunak',
                 'description' => 'Berbagai pilihan makanan dan minuman energi tinggi yang dikelola oleh siswa jurusan Rekayasa Perangkat Lunak.',
-                'image' => 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/rpl.jpg.jpeg',
                 'status' => 'open',
-                'location' => 'Zona D - Stand No. 07 (Tech Corner)',
-                'contact_person' => 'Pak Dian (0812-1001-007)',
+                'location' => 'Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
             [
-                'name' => 'Stand Akuntansi 2',
+                'name' => 'BaleMindo',
                 'department' => 'Akuntansi 2',
                 'description' => 'Menu nusantara bergizi seimbang, aneka jus buah murni, dan dessert manis dengan perhitungan nilai gizi tepat.',
-                'image' => 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=600&auto=format&fit=crop&q=80',
+                'image' => '/images/standak2.jpg.jpeg',
                 'status' => 'open',
-                'location' => 'Zona D - Stand No. 08',
-                'contact_person' => 'Bu Fitri (0812-1001-008)',
+                'location' => 'Kantin SMKN20',
+                'contact_person' => 'Bu Retno (0812-3456-789)',
             ],
         ];
 
@@ -153,6 +153,29 @@ class DatabaseSeeder extends Seeder
         foreach ($standsData as $index => $s) {
             $stands[$index + 1] = Stand::create($s);
         }
+        // 5b. Akun Penjaga (satu per stand)
+        $penjagaData = [
+            ['name' => 'Penjaga Bisnis Digital',           'email' => 'penjaga.bisdig@melatiarea.sch.id',   'stand_id' => 1],
+            ['name' => 'Penjaga Manajemen Logistik',       'email' => 'penjaga.logistik@melatiarea.sch.id', 'stand_id' => 2],
+            ['name' => 'Penjaga Perbankan Syariah',        'email' => 'penjaga.syariah@melatiarea.sch.id',  'stand_id' => 3],
+            ['name' => 'Penjaga Akuntansi 1',              'email' => 'penjaga.akl1@melatiarea.sch.id',     'stand_id' => 4],
+            ['name' => 'Penjaga Bisnis Retail',            'email' => 'penjaga.retail@melatiarea.sch.id',   'stand_id' => 5],
+            ['name' => 'Penjaga Manajemen Perkantoran',    'email' => 'penjaga.mp@melatiarea.sch.id',       'stand_id' => 6],
+            ['name' => 'Penjaga Rekayasa Perangkat Lunak', 'email' => 'penjaga.rpl@melatiarea.sch.id',      'stand_id' => 7],
+            ['name' => 'Penjaga Akuntansi 2',              'email' => 'penjaga.akl2@melatiarea.sch.id',     'stand_id' => 8],
+        ];
+
+        foreach ($penjagaData as $p) {
+            User::create([
+                'name'     => $p['name'],
+                'email'    => $p['email'],
+                'password' => Hash::make('password123'),
+                'role'     => 'penjaga',
+                'stand_id' => $stands[$p['stand_id']]->id,
+                'phone'    => '0812000000' . str_pad($p['stand_id'], 2, '0', STR_PAD_LEFT),
+            ]);
+        }
+
 
         // 4. Produk-Produk Tiap Stand (Minimal 3 - 5 produk per stand)
         $productsData = [
@@ -626,3 +649,4 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+

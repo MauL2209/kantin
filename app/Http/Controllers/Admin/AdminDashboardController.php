@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Stand;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +29,8 @@ class AdminDashboardController extends Controller
 
         $totalProducts = Product::count();
         $totalStands = Stand::count();
+        $totalSiswa = User::where('role', 'siswa')->count();
+        $totalPenjaga = User::where('role', 'penjaga')->count();
 
         $processingOrdersCount = Order::where('status', 'Sedang Diproses')->count();
         $readyOrdersCount = Order::where('status', 'Siap Diambil')->count();
@@ -79,6 +82,8 @@ class AdminDashboardController extends Controller
             'todayOrdersCount',
             'totalProducts',
             'totalStands',
+            'totalSiswa',
+            'totalPenjaga',
             'processingOrdersCount',
             'readyOrdersCount',
             'dates',

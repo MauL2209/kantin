@@ -42,7 +42,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This option allows you to easily specify that all of your session data
-    | should be encrypted before it's stored. All encryption is performed
+    | should be encrypted before it is stored. All encryption is performed
     | automatically by Laravel and you may use the session like normal.
     |
     */
@@ -82,7 +82,7 @@ return [
     |
     | When using the "database" session driver, you may specify the table to
     | be used to store sessions. Of course, a sensible default is defined
-    | for you; however, you're welcome to change this to another table.
+    | for you; however, you are welcome to change this to another table.
     |
     */
 
@@ -139,7 +139,7 @@ return [
     |
     | The session cookie path determines the path for which the cookie will
     | be regarded as available. Typically, this will be the root path of
-    | your application, but you're free to change this when necessary.
+    | your application, but you are free to change this when necessary.
     |
     */
 
@@ -152,7 +152,7 @@ return [
     |
     | This value determines the domain and subdomains the session cookie is
     | available to. By default, the cookie will be available to the root
-    | domain without subdomains. Typically, this shouldn't be changed.
+    | domain without subdomains. Typically, this should not be changed.
     |
     */
 
@@ -165,7 +165,7 @@ return [
     |
     | By setting this option to true, session cookies will only be sent back
     | to the server if the browser has a HTTPS connection. This will keep
-    | the cookie from being sent to you when it can't be done securely.
+    | the cookie from being sent to you when it cannot be done securely.
     |
     */
 
@@ -178,7 +178,7 @@ return [
     |
     | Setting this value to true will prevent JavaScript from accessing the
     | value of the cookie and the cookie will only be accessible through
-    | the HTTP protocol. It's unlikely you should disable this option.
+    | the HTTP protocol. It is unlikely you should disable this option.
     |
     */
 

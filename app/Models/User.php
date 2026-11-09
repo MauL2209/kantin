@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'class_room',
         'phone',
         'avatar',
+        'stand_id',
     ];
 
     /**
@@ -74,5 +76,21 @@ class User extends Authenticatable
     public function isSiswa(): bool
     {
         return $this->role === 'siswa';
+    }
+
+    /**
+     * Check if user is a penjaga (stand keeper).
+     */
+    public function isPenjaga(): bool
+    {
+        return $this->role === 'penjaga';
+    }
+
+    /**
+     * User belongs to a stand.
+     */
+    public function stand(): BelongsTo
+    {
+        return $this->belongsTo(Stand::class);
     }
 }

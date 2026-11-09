@@ -53,11 +53,11 @@
 <body class="bg-slate-100 text-slate-800 antialiased" x-data="{ sidebarOpen: false }">
 
     <div class="min-h-screen flex">
-        
+
         <!-- SIDEBAR -->
         <aside class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col justify-between"
                :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
-            
+
             <div>
                 <!-- Brand Header -->
                 <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800 bg-slate-950/40">
@@ -112,6 +112,11 @@
                         <span>Kategori Menu</span>
                     </a>
 
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition {{ request()->routeIs('admin.users.*') ? 'bg-emerald-600 text-white font-bold shadow' : 'hover:bg-slate-800 text-slate-400 hover:text-white' }}">
+                        <i class="fas fa-users w-4 text-sm"></i>
+                        <span>Kelola Pengguna</span>
+                    </a>
+
                     <div class="px-3 pt-4 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">Laporan & Analitik</div>
 
                     <a href="{{ route('admin.reports.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition {{ request()->routeIs('admin.reports.*') ? 'bg-emerald-600 text-white font-bold shadow' : 'hover:bg-slate-800 text-slate-400 hover:text-white' }}">
@@ -151,7 +156,7 @@
 
         <!-- MAIN WRAPPER -->
         <div class="flex-grow lg:pl-64 flex flex-col min-h-screen">
-            
+
             <!-- Topbar Header -->
             <header class="h-20 bg-white border-b border-slate-200/80 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8 shadow-sm">
                 <div class="flex items-center gap-3">

@@ -61,11 +61,8 @@
             <div>
                 <!-- Brand Header -->
                 <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800 bg-slate-950/40">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-teal-400 p-0.5 flex items-center justify-center">
-                        <div class="w-full h-full bg-slate-900 rounded-[10px] flex flex-col items-center justify-center text-center p-0.5">
-                            <span class="text-[8px] font-black text-brand-400 leading-none">LOGO</span>
-                            <span class="text-[7px] font-extrabold text-slate-400 leading-none mt-0.5">SMK</span>
-                        </div>
+                    <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+                        <img src="{{ asset('images/logo-smkn20.png') }}" alt="Logo SMKN 20 Jakarta" class="w-10 h-10 object-contain drop-shadow">
                     </div>
                     <div>
                         <span class="text-[10px] font-bold tracking-widest text-brand-400 uppercase">ADMIN PANEL</span>

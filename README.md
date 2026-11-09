@@ -1,125 +1,214 @@
-# Kantin Sekolah [MELATIAREA] 🍱🥤
+# Kantin Melati Area
 
-Aplikasi Web Sistem Pemesanan Makanan dan Minuman Kantin Sekolah Modern Berbasis Pre-Order Online, dikembangkan menggunakan **Laravel 12**, **MySQL**, dan **Tailwind CSS**.
-
-Sistem ini mewadahi **8 Stand Bisnis/Kewirausahaan** dari 8 jurusan SMK:
-1. **Bisnis Digital**
-2. **Manajemen Logistik**
-3. **Layanan Perbankan Syariah**
-4. **Akuntansi 1**
-5. **Bisnis Retail**
-6. **Manajemen Perkantoran**
-7. **Rekayasa Perangkat Lunak**
-8. **Akuntansi 2**
+> Sistem Informasi dan Pemesanan Makanan/Minuman Kantin SMKN 20 Jakarta
 
 ---
 
-## 🌟 Fitur Utama
+## Daftar Isi
 
-### 🎓 Siswa / Pembeli:
-- **Katalog 8 Stand Jurusan:** Menampilkan status operasional (Buka/Tutup), lokasi, pengelola, dan jumlah varian menu.
-- **Menu Lengkap & Filter:** Pencarian real-time, filter 8 stand, filter 5 kategori (*Makanan, Minuman, Snack, Mie, Dessert*), sorting harga dan tanggal.
-- **Indikator Stok Otomatis:** Label **"Habis"** dan tombol nonaktif otomatis jika stok bernilai 0.
-- **Keranjang Belanja:** Kontrol kuantitas porsi (+/-) dengan validasi batas stok, hapus item, dan subtotal dinamis.
-- **Checkout Pre-Order:** Formulir data pemesan (Nama, NIS, Kelas, Ruang Pengambilan, No. WhatsApp, Catatan).
-- **3 Metode Pembayaran:** *Bayar di Kasir (Tunai)*, *QRIS Melatiarea (E-Wallet)*, dan *Transfer Bank*.
-- **Pesanan Saya & Stepper Real-Time:** 4 tahap proses visual:
-  `Pesanan Dibuat` ➔ `Sedang Diproses` ➔ `Siap Diambil` ➔ `Selesai`
-
-### 🛡️ Administrator Kantin:
-- **Dashboard Statistik Modern:** Ringkasan pendapatan hari ini, jumlah pesanan, total produk, dan total stand.
-- **Grafik Interaktif Chart.js:** Penjualan harian 7 hari terakhir dan 5 menu paling laris.
-- **CRUD 8 Stand Kantin:** Tambah, edit, hapus, dan tombol switch status buka/tutup cepat.
-- **CRUD Produk & Quick Stock:** Tambah menu baru, upload foto, edit harga, dan ubah stok langsung dari tabel.
-- **Kelola Kategori Menu:** Manajemen klasifikasi hidangan.
-- **Manajemen Pesanan:** Ubah status pesanan real-time, batalkan pesanan dengan auto-restorasi stok, dan cetak struk kasir/dapur (thermal print).
-- **Laporan Penjualan & Keuangan:** Filter periode (Hari ini, Minggu ini, Bulan ini, Kustom tanggal, Filter stand), serta fitur **Export CSV/Excel** dan **Cetak PDF Resmi**.
+1. [Project Overview](#1-project-overview)
+2. [Fitur Utama](#2-fitur-utama)
+3. [Roles dan Hak Akses](#3-roles-dan-hak-akses)
+4. [Teknologi yang Digunakan](#4-teknologi-yang-digunakan)
+5. [Persyaratan Sistem](#5-persyaratan-sistem)
+6. [Instalasi dan Konfigurasi](#6-instalasi-dan-konfigurasi)
+7. [Struktur Folder Proyek](#7-struktur-folder-proyek)
+8. [Akun Demo](#8-akun-demo)
+9. [Metode Pembayaran](#9-metode-pembayaran)
+10. [Informasi Pengembang](#10-informasi-pengembang)
 
 ---
 
-## 🔑 Akun Demo Pengujian
+## 1. Project Overview
 
-| Role | Email | Password | Keterangan |
+Kantin Melati Area adalah aplikasi web berbasis Laravel 12 untuk sistem informasi dan pemesanan makanan/minuman kantin SMKN 20 Jakarta. Sistem ini melayani 8 stand kantin yang masing-masing dikelola oleh jurusan berbeda.
+
+Aplikasi ini memungkinkan siswa memesan makanan secara daring, penjaga kantin mengelola produk dan pesanan stand mereka, serta admin memantau seluruh operasional kantin dari satu panel terpusat.
+
+---
+
+## 2. Fitur Utama
+
+**Untuk Siswa:**
+- Melihat 8 stand kantin beserta status operasional
+- Menjelajahi menu produk dengan filter kategori dan stand
+- Keranjang belanja berbasis session
+- Checkout dengan metode pembayaran: cash, transfer bank, QRIS
+- Pelacakan status pesanan
+- Manajemen profil dengan upload foto avatar
+
+**Untuk Penjaga Kantin:**
+- Dashboard statistik harian stand sendiri
+- CRUD produk terbatas pada stand yang ditugaskan
+- Manajemen stok dengan pembaruan otomatis status ketersediaan
+- Pengelolaan pesanan dengan alur status terstruktur
+- Laporan penjualan stand dengan filter periode
+
+**Untuk Admin:**
+- Dashboard agregat dengan grafik penjualan (Chart.js)
+- Manajemen penuh seluruh stand, produk, dan kategori
+- Pengelolaan semua pesanan termasuk pembatalan
+- Laporan penjualan dengan filter periode, stand, dan tanggal kustom
+- Export laporan ke CSV (kompatibel Microsoft Excel)
+- Manajemen akun pengguna (CRUD + reset password)
+
+---
+
+## 3. Roles dan Hak Akses
+
+| Role | Prefix URL | Middleware | Deskripsi |
 |---|---|---|---|
-| **Admin** | `admin@melatiarea.sch.id` | `password123` | Akses penuh dashboard `/admin` |
-| **Siswa 1** | `siswa@melatiarea.sch.id` | `password123` | Muhammad Rizky Pratama (XII RPL 1) |
-| **Siswa 2** | `siti@melatiarea.sch.id` | `password123` | Siti Nur Aisyah (XI Bisnis Digital 2) |
-| **Siswa 3** | `dimas@melatiarea.sch.id` | `password123` | Dimas Anggara (X Akuntansi 1) |
-
-*(Tersedia tombol 1-klik Quick Fill di halaman login untuk kemudahan login saat presentasi).*
+| **Siswa** | / | auth | Pembeli; akses fitur belanja dan profil |
+| **Penjaga** | /penjaga | auth, penjaga | Pengelola stand; akses produk dan pesanan stand sendiri |
+| **Admin** | /admin | auth, admin | Pengelola sistem; akses penuh ke seluruh fitur |
 
 ---
 
-## 🛠️ Panduan Instalasi & Menjalankan di Laragon
+## 4. Teknologi yang Digunakan
 
-### Langkah 1: Buka Laragon
-1. Buka aplikasi **Laragon** di komputer Anda.
-2. Klik tombol **"Start All"** untuk menjalankan server Apache dan MySQL.
+| Komponen | Teknologi |
+|---|---|
+| Backend Framework | Laravel 12 (PHP 8.2+) |
+| Database | MySQL |
+| Frontend CSS | Tailwind CSS (CDN) |
+| Ikon | Font Awesome 6.5 |
+| Grafik | Chart.js |
+| Interaktivitas | Alpine.js 3.x |
+| Font | Plus Jakarta Sans (Google Fonts) |
+| Package Manager | Composer, NPM |
+| Build Tool | Vite |
 
-### Langkah 2: Buat Database MySQL
-1. Klik tombol **"Database"** di Laragon (membuka HeidiSQL atau phpMyAdmin).
-2. Buat database baru bernama:
-   ```sql
-   CREATE DATABASE kantin_melatiarea;
-   ```
+---
 
-### Langkah 3: Konfigurasi File `.env`
-Pastikan file `.env` memiliki konfigurasi MySQL sebagai berikut:
+## 5. Persyaratan Sistem
+
+- PHP 8.2 atau lebih baru
+- Composer 2.x
+- MySQL 5.7 atau lebih baru
+- Node.js 18+ dan NPM
+- Web server: Apache (Laragon/XAMPP) atau built-in PHP server
+- Ekstensi PHP: BCMath, Ctype, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML
+
+---
+
+## 6. Instalasi dan Konfigurasi
+
+### Langkah 1: Clone atau Ekstrak Proyek
+
+```bash
+git clone <url-repository> kantin-melatiarea
+cd kantin-melatiarea
+```bash
+
+### Langkah 2: Install Dependensi PHP
+
+```bash
+composer install
+```bash
+
+### Langkah 3: Install Dependensi Node.js
+
+```bash
+npm install
+```bash
+
+### Langkah 4: Salin File Konfigurasi
+
+```bash
+cp .env.example .env
+```bash
+
+### Langkah 5: Generate Application Key
+
+```bash
+php artisan key:generate
+```bash
+
+### Langkah 6: Konfigurasi File `.env`
+
+Buka file `.env` dan sesuaikan konfigurasi berikut:
+
 ```env
+APP_NAME="Kantin Sekolah MELATIAREA"
+APP_ENV=local
+APP_URL=http://localhost:8000
+
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=kantin_melatiarea
 DB_USERNAME=root
 DB_PASSWORD=
-```
 
-### Langkah 4: Jalankan Migrasi & Database Seeder
-Buka **Terminal** di Laragon (klik kanan di Laragon ➔ *Laragon* ➔ *Terminal* atau buka PowerShell di folder project):
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+```env
+
+### Langkah 7: Buat Database MySQL
+
+Buat database baru di MySQL:
+
+```sql
+CREATE DATABASE kantin_melatiarea CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```sql
+
+### Langkah 8: Jalankan Migrasi Database
+
 ```bash
-# Jalankan migrasi tabel dan seeder data awal
-php artisan migrate --seed
+php artisan migrate
+```bash
 
-# Hubungkan folder upload gambar ke public storage
-php artisan storage:link
-```
+### Langkah 9: Jalankan Seeder
 
-*(Alternatif: Jika ingin langsung tanpa artisan, file dump data SQL siap diimpor sudah tersedia di `database/kantin_melatiarea_data.sql`).*
+Seeder akan membuat 8 stand kantin, 5 kategori produk, 32+ produk, akun admin, akun siswa demo, dan akun penjaga per stand.
 
-### Langkah 5: Jalankan Aplikasi
+```bash
+php artisan db:seed
+```bash
+
+Atau jalankan keduanya sekaligus:
+
+```bash
+php artisan migrate:fresh --seed
+```bash
+
+### Langkah 10: Build Asset Frontend
+
+```bash
+npm run build
+```bash
+
+### Langkah 11: Jalankan Aplikasi
+
 ```bash
 php artisan serve
-```
-Buka browser dan akses:
-👉 **`http://127.0.0.1:8000`** atau **`http://localhost:8000`**
+```bash
 
-*(Jika menggunakan virtual host otomatis Laragon, Anda juga bisa mengakses melalui `http://portofolioproject.test`).*
+Aplikasi dapat diakses di: `http://localhost:8000`
 
 ---
 
-## 📁 Struktur Folder & File Utama
+## 7. Struktur Folder Proyek
 
-```
-portofolioproject/
+```text
+kantin-melatiarea/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/
-│   │   │   ├── Admin/
-│   │   │   │   ├── AdminDashboardController.php
-│   │   │   │   ├── CategoryController.php
-│   │   │   │   ├── OrderController.php
-│   │   │   │   ├── ProductController.php
-│   │   │   │   ├── ReportController.php
-│   │   │   │   └── StandController.php
+│   │   │   ├── Admin/          # Controller panel admin
+│   │   │   ├── Penjaga/        # Controller panel penjaga
 │   │   │   ├── AuthController.php
 │   │   │   ├── CartController.php
 │   │   │   ├── CheckoutController.php
 │   │   │   ├── HomeController.php
 │   │   │   ├── OrderController.php
+│   │   │   ├── PasswordController.php
 │   │   │   ├── ProductController.php
+│   │   │   ├── ProfileController.php
 │   │   │   └── StandController.php
 │   │   └── Middleware/
-│   │       └── AdminMiddleware.php
+│   │       ├── AdminMiddleware.php
+│   │       └── PenjagaMiddleware.php
 │   └── Models/
 │       ├── Category.php
 │       ├── Order.php
@@ -129,54 +218,94 @@ portofolioproject/
 │       ├── Stand.php
 │       └── User.php
 ├── database/
-│   ├── migrations/
-│   │   ├── 0001_01_01_000000_create_users_table.php
-│   │   ├── 2026_11_01_000001_create_stands_table.php
-│   │   ├── 2026_11_01_000002_create_categories_table.php
-│   │   ├── 2026_11_01_000003_create_products_table.php
-│   │   ├── 2026_11_01_000004_create_orders_table.php
-│   │   ├── 2026_11_01_000005_create_order_details_table.php
-│   │   └── 2026_11_01_000006_create_payments_table.php
+│   ├── migrations/             # Skema database
 │   └── seeders/
-│       └── DatabaseSeeder.php
+│       └── DatabaseSeeder.php  # Data awal 8 stand + produk + akun demo
+├── public/
+│   ├── images/                 # Gambar stand kantin
+│   └── avatars/                # Foto profil pengguna (dibuat otomatis)
 ├── resources/
 │   └── views/
-│       ├── admin/
-│       │   ├── categories/
-│       │   ├── orders/
-│       │   ├── products/
-│       │   ├── reports/
-│       │   ├── stands/
-│       │   └── dashboard.blade.php
-│       ├── auth/
-│       │   ├── login.blade.php
-│       │   └── register.blade.php
-│       ├── cart/
-│       │   └── index.blade.php
-│       ├── checkout/
-│       │   ├── index.blade.php
-│       │   └── success.blade.php
-│       ├── layouts/
-│       │   ├── admin.blade.php
-│       │   └── app.blade.php
-│       ├── menu/
-│       │   ├── index.blade.php
-│       │   └── show.blade.php
-│       ├── orders/
-│       │   ├── index.blade.php
-│       │   └── show.blade.php
-│       ├── partials/
-│       │   ├── footer.blade.php
-│       │   └── navbar.blade.php
-│       └── home.blade.php
-└── routes/
-    └── web.php
-```
+│       ├── admin/              # View panel admin
+│       ├── auth/               # Halaman login dan registrasi
+│       ├── cart/               # Halaman keranjang
+│       ├── checkout/           # Halaman checkout dan sukses
+│       ├── layouts/            # Layout utama (app, admin, penjaga)
+│       ├── menu/               # Halaman daftar dan detail produk
+│       ├── orders/             # Halaman riwayat pesanan
+│       ├── penjaga/            # View panel penjaga
+│       ├── profile/            # Halaman profil dan ubah password
+│       └── stands/             # Halaman daftar dan detail stand
+├── routes/
+│   └── web.php                 # Seluruh definisi route aplikasi
+├── .env.example                # Template konfigurasi environment
+├── composer.json
+└── PRD.md                      # Product Requirements Document
+```text
 
 ---
 
-## 🔒 Hak Akses & Keamanan
-1. **Middleware Admin:** Route grup `/admin/*` dilindungi middleware `['auth', 'admin']`. Pengguna non-admin atau siswa yang mencoba mengakses dashboard admin akan otomatis ditolak dengan pesan error `403 Forbidden`.
-2. **CSRF Protection:** Seluruh form pemesanan, keranjang, dan modul admin dilindungi token `@csrf`.
-3. **Database Transaction:** Proses checkout menggunakan `DB::beginTransaction()` dan `DB::commit()` untuk memastikan konsistensi pesanan, stok produk, dan pembayaran.
-4. **Password Hashing:** Menggunakan algoritma `bcrypt` bawaan Laravel.
+## 8. Akun Demo
+
+Akun-akun berikut dibuat secara otomatis saat menjalankan `php artisan db:seed`:
+
+### Admin
+
+| Field | Nilai |
+|---|---|
+| Email | admin@melatiarea.sch.id |
+| Password | password123 |
+| Role | admin |
+
+### Siswa
+
+| Nama | Email | Password | NIS |
+|---|---|---|---|
+| Muhammad Rizky Pratama | siswa@melatiarea.sch.id | password123 | 20241001 |
+| Siti Nur Aisyah | siti@melatiarea.sch.id | password123 | 20241002 |
+| Dimas Anggara | dimas@melatiarea.sch.id | password123 | 20241003 |
+
+### Penjaga Kantin (satu per stand)
+
+| Stand | Email | Password |
+|---|---|---|
+| Bisnis Digital | penjaga.bisdig@melatiarea.sch.id | password123 |
+| Manajemen Logistik | penjaga.logistik@melatiarea.sch.id | password123 |
+| Layanan Perbankan Syariah | penjaga.syariah@melatiarea.sch.id | password123 |
+| Akuntansi 1 | penjaga.akl1@melatiarea.sch.id | password123 |
+| Bisnis Retail | penjaga.retail@melatiarea.sch.id | password123 |
+| Manajemen Perkantoran | penjaga.mp@melatiarea.sch.id | password123 |
+| Rekayasa Perangkat Lunak | penjaga.rpl@melatiarea.sch.id | password123 |
+| Akuntansi 2 | penjaga.akl2@melatiarea.sch.id | password123 |
+
+> **Perhatian:** Ubah seluruh password di atas sebelum menggunakan di lingkungan produksi.
+
+---
+
+## 9. Metode Pembayaran
+
+Aplikasi mendukung tiga metode pembayaran. Semua metode hanya berupa pilihan di form checkout; tidak ada integrasi payment gateway eksternal.
+
+| Metode | Kode | Status Awal | Keterangan |
+|---|---|---|---|
+| Bayar di Kasir (Tunai) | cash | pending | Pembayaran dilakukan saat pengambilan pesanan |
+| Transfer Bank | transfer | paid | Pembayaran dianggap selesai saat checkout |
+| QRIS (E-Wallet / Bank) | qris | paid | Pembayaran dianggap selesai saat checkout |
+
+> Upload bukti pembayaran belum diimplementasikan. Kolom `proof_image` tersedia di tabel `payments` untuk pengembangan selanjutnya.
+
+---
+
+## 10. Informasi Pengembang
+
+| Item | Keterangan |
+|---|---|
+| Instansi | SMKN 20 Jakarta |
+| Proyek | Sistem Informasi Kantin Melati Area |
+| Framework | Laravel 12 |
+| Database | MySQL |
+| Bahasa Pemrograman | PHP 8.2+ |
+
+---
+
+*Dokumentasi ini dibuat berdasarkan source code aktual proyek. Untuk informasi teknis lebih lengkap, lihat [PRD.md](PRD.md).*

@@ -10,11 +10,8 @@
             
             <!-- Header & Branding -->
             <div class="text-center space-y-2">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-teal-500 p-0.5 mx-auto flex items-center justify-center shadow-md">
-                    <div class="w-full h-full bg-white rounded-xl flex flex-col items-center justify-center p-1">
-                        <span class="text-[9px] font-black text-brand-700 leading-none">LOGO</span>
-                        <span class="text-[8px] font-bold text-slate-600 leading-none mt-0.5">SEKOLAH</span>
-                    </div>
+                <div class="w-14 h-14 mx-auto flex items-center justify-center">
+                    <img src="{{ asset('images/logo-smkn20.png') }}" alt="Logo SMKN 20 Jakarta" class="w-14 h-14 object-contain drop-shadow-md">
                 </div>
                 <h1 class="text-2xl font-black text-slate-900 tracking-tight">Masuk ke Akun</h1>
                 <p class="text-xs text-slate-500">Pilih akunmu untuk mulai memesan atau mengelola kantin.</p>
@@ -46,7 +43,7 @@
                         <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
                             <i class="fas fa-lock text-xs"></i>
                         </span>
-                        <input type="password" id="passwordInput" name="password" required placeholder="••••••••" 
+                        <input type="password" id="passwordInput" name="password" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" 
                                class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-slate-50 focus:bg-white">
                     </div>
                 </div>
